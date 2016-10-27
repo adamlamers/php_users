@@ -1,1 +1,7 @@
 # PHP User Management
+
+# Run migrations
+
+```
+    tools/vagrant_migrate.sh
+```
