@@ -1,5 +1,9 @@
 {
     "require": {
         "robmorgan/phinx": "^0.6.5"
+    },
+    "autoload": {
+        "psr-4": { "PHPUsers\\Controllers\\" : "controllers/",
+                   "PHPUsers\\" : "core/"}
     }
 }
