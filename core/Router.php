@@ -8,14 +8,15 @@ class Router
 
     public function add($methods, $uri, $handler)
     {
-        if($this->validateMethods($methods)) {
+        if ($this->validateMethods($methods)) {
             $this->table[$uri] = new Route($methods, $uri, $handler);
         }
     }
 
-    public function dispatch($uri) {
-        foreach($this->table as $routeUri => $route) {
-            if(preg_match('#'.$routeUri.'#', $uri, $matches)) {
+    public function dispatch($uri)
+    {
+        foreach ($this->table as $routeUri => $route) {
+            if (preg_match('#'.$routeUri.'#', $uri, $matches)) {
                 array_shift($matches);
                 return $this->resolve($route, $matches);
             }
@@ -25,9 +26,10 @@ class Router
         echo "404";
     }
 
-    public function dispatch2($uri) {
+    public function dispatch2($uri)
+    {
 
-        if(array_key_exists($uri, $this->table)) {
+        if (array_key_exists($uri, $this->table)) {
             $route = $this->table[$uri];
             echo "Route exists: ".$route->getHandler()."<br>";
             return $this->resolve($uri, $route);
@@ -37,7 +39,8 @@ class Router
         }
     }
 
-    private function resolve($route, $args) {
+    private function resolve($route, $args)
+    {
         $parts = explode('@', $route->getHandler());
 
         $controllerName = '\\PHPUsers\\Controllers\\'.$parts[0];
@@ -49,12 +52,12 @@ class Router
 
     private function validateMethods($methods)
     {
-        if(is_string($methods)) {
+        if (is_string($methods)) {
             return in_array($methods, $this->allowedMethods);
         }
 
-        foreach($methods as $method) {
-            if(!in_array($method, $this->allowedMethods)) {
+        foreach ($methods as $method) {
+            if (!in_array($method, $this->allowedMethods)) {
                 return false;
             }
         }

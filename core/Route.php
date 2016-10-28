@@ -9,7 +9,7 @@ class Route
 
     public function __construct($methods, $uri, $handler)
     {
-        if(is_string($methods)) {
+        if (is_string($methods)) {
             $methods = [$methods];
         }
         $this->allowedMethods = $methods;

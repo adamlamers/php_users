@@ -6,17 +6,17 @@ class Application
 
     public $router;
 
-    function __construct()
+    public function __construct()
     {
         $this->router = new Router();
     }
 
-    function run()
+    public function run()
     {
         echo $this->router->dispatch($this->getRequestPath());
     }
 
-    function getRequestPath()
+    public function getRequestPath()
     {
         return $_SERVER['REQUEST_URI'];
     }
