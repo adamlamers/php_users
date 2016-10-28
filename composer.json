@@ -4,6 +4,8 @@
     },
     "autoload": {
         "psr-4": { "PHPUsers\\Controllers\\" : "controllers/",
-                   "PHPUsers\\" : "core/"}
+                   "PHPUsers\\Models\\" : "models/",
+                   "PHPUsers\\" : "core/"},
+        "files" : [ "config.php" ]
     }
 }
