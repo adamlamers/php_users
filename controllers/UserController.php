@@ -7,9 +7,9 @@ class UserController
 {
 
     /**
-     ** POST
-     ** Create a new user
-     **/
+     * POST
+     * Create a new user
+     */
     public function create()
     {
 
@@ -30,14 +30,17 @@ class UserController
     }
 
     /**
-     ** GET
-     ** Retrieve a user record
-     **/
+     * GET
+     * Retrieve a user record
+     * @param int $id The ID of the user to update. Passed from the Router dispatch method.
+     */
     public function get($id)
     {
         $user = User::load($id);
         if ($user) {
-            return $user->json();
+            $response = [ "status" => "ok", "message" => "Retrieved user successfully.",
+                "user" => $user->as_array() ];
+            return json_encode($response);
         } else {
             $response = [ "status" => "fail",
                 "message" => "User does not exist" ];
@@ -47,9 +50,10 @@ class UserController
     }
 
     /**
-     ** POST
-     ** Update a user record
-     **/
+     * POST
+     * Update a user record
+     * @param int $id The ID of the user to update. Passed from the Router dispatch method.
+     */
     public function update($id)
     {
         $user = User::load($id);
@@ -89,9 +93,10 @@ class UserController
     }
 
     /**
-     ** POST
-     ** Remove a user record
-     **/
+     * POST
+     * Remove a user record
+     * @param int $id The ID of the user to update. Passed from the Router dispatch method.
+     */
     public function remove($id)
     {
         $user = User::load($id);
@@ -102,13 +107,11 @@ class UserController
                     "deleted_user_id" => $user->getId() ];
                 return json_encode($response);
             } else {
-                $response = [ "status" => "fail",
-                    "message" => "Failed to delete user." ];
+                $response = [ "status" => "fail", "message" => "Failed to delete user." ];
                 return json_encode($response);
             }
         } else {
-            $response = [ "status" => "fail",
-                "message" => "User does not exist" ];
+            $response = [ "status" => "fail", "message" => "User does not exist." ];
             http_response_code(404);
             return json_encode($response);
         }
