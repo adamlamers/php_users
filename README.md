@@ -26,9 +26,9 @@ Tests assume an empty database. If you're running a dirty dev instance, clear th
 
     vagrant ssh -c "cd /vagrant && ./vendor/bin/phinx migrate -e development -t 0"
 Then, run
-    `tools/vagrant_migrate.sh`
+    tools/vagrant_migrate.sh
 And the tests should work.
-    `tools/vagrant_test.sh`
+    tools/vagrant_test.sh
 
 ### Usage
 
@@ -37,16 +37,16 @@ it. As an example, here are some CURL command examples to call the endpoints.
 
 #### Create a user
 
-    `curl --data "email=test&first_name=test&last_name=test&password=test" http://testbox.dev/user/create`
+    curl --data "email=test&first_name=test&last_name=test&password=test" http://testbox.dev/user/create
 
 #### Retrieve a user
 
-    `curl http://testbox.dev/user/3/get`
+    curl http://testbox.dev/user/3/get
 
 #### Modify a user
 
-    `curl --data "email=test2" http://testbox.dev/user/3/update" http://testbox.dev/user/3/update`
+    curl --data "email=test2" http://testbox.dev/user/3/update" http://testbox.dev/user/3/update
 
 #### Delete a user
 
-    `curl http://testbox.dev/user/3/delete`
+    curl http://testbox.dev/user/3/delete
