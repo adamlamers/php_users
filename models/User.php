@@ -75,12 +75,12 @@ class User
      */
     public function json()
     {
-        $array = $this->as_array();
+        $array = $this->asArray();
 
         return json_encode($array);
     }
 
-    public function as_array()
+    public function asArray()
     {
         $array = [ "id" => $this->id,
                    "email" => $this->email,

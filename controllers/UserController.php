@@ -39,7 +39,7 @@ class UserController
         $user = User::load($id);
         if ($user) {
             $response = [ "status" => "ok", "message" => "Retrieved user successfully.",
-                "user" => $user->as_array() ];
+                "user" => $user->asArray() ];
             return json_encode($response);
         } else {
             $response = [ "status" => "fail",
