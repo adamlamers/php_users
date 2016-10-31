@@ -6,19 +6,19 @@
 
 Create vagrant box
 
-    `vagrant up`
+    vagrant up
 
 Install composer packages
 
-    `composer install`
+    composer install
 
 Run migrations
 
-    `tools/vagrant_migrate.sh`
+    tools/vagrant_migrate.sh
 
 Run tests
 
-    `tools/vagrant_test.sh`
+    tools/vagrant_test.sh
 
 ### Tests
 
