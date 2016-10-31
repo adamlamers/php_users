@@ -15,8 +15,10 @@ class Router
     public function add($methods, $uri, $handler)
     {
         if ($this->validateMethods($methods)) {
-            $this->table[$uri] = new Route($methods, $uri, $handler);
+            array_push($this->table, new Route($methods, $uri, $handler));
+            return true;
         }
+        return false;
     }
 
     /**
@@ -25,15 +27,15 @@ class Router
      */
     public function dispatch($uri)
     {
-        foreach ($this->table as $routeUri => $route) {
-            if (preg_match('#'.$routeUri.'#', $uri, $matches)) {
-                array_shift($matches);
-                return $this->resolve($route, $matches);
+        foreach ($this->table as $route) {
+            if($route->matches($_SERVER['REQUEST_METHOD'], $uri, $arguments)) {
+                return $this->resolve($route, $arguments);
             }
         }
 
         http_response_code(404);
-        echo "404";
+        $response = ['status' => 'fail', 'message' => 'Resource not found.'];
+        return json_encode($response);
     }
 
     /**
