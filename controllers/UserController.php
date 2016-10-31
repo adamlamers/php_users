@@ -23,10 +23,13 @@ class UserController
         }
 
         $user = new User($_POST['email'], $_POST['first_name'], $_POST['last_name'], $_POST['password']);
-        $user->save();
-
-        $response = [ "status" => "ok", "message" => "User Created", "new_user_id" => $user->getId()];
-        return json_encode($response);
+        if($user->save()) {
+            $response = [ "status" => "ok", "message" => "User Created", "new_user_id" => $user->getId()];
+            return json_encode($response);
+        } else {
+            $response = [ "status" => "fail", "message" => "Failed to create user.", "reason" => $user->getError()];
+            return json_encode($response);
+        }
     }
 
     /**

@@ -13,6 +13,7 @@ class User
     private $id;
     private $exists;
     private $loaded_password;
+    private $error;
     protected $table_name = 'users';
 
 
@@ -34,6 +35,7 @@ class User
         $this->last_name = $last_name;
         $this->password = $password;
         $this->exists = false;
+        $this->error = '';
     }
 
     /**
@@ -53,6 +55,10 @@ class User
             $stmt->bind_param("ssssi", $this->email, $this->first_name, $this->last_name, $this->password, $this->id);
 
             $result = $stmt->execute();
+
+            if(!$result) {
+                $this->error = $stmt->error;
+            }
             return $result;
         } else {
             $this->hashPassword();
@@ -64,6 +70,8 @@ class User
             if ($result) {
                 $this->exists = true;
                 $this->id = $stmt->insert_id;
+            } else {
+               $this->error = $stmt->error;
             }
 
             return $result;
@@ -157,6 +165,14 @@ class User
         $stmt = $mysqli->prepare("DELETE FROM users WHERE id=?");
         $stmt->bind_param("i", $this->id);
         return $stmt->execute();
+    }
+
+    /**
+     * Returns an error message, if there was an error saving the user.
+     */
+    public function getError()
+    {
+        return $this->error;
     }
 
     /**
