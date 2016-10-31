@@ -23,6 +23,9 @@ class UserModelTests extends TestCase
         return $user->getId();
     }
 
+    /**
+     * Test that the $user->asJSON() model returns correct data.
+     */
     public function testUserAsJSON()
     {
         $user = new User('test', 'test_first', 'test_last', 'test_pass');

@@ -80,6 +80,9 @@ class User
         return json_encode($array);
     }
 
+    /**
+     * Returns the contents of the User as an array.
+     */
     public function asArray()
     {
         $array = [ "id" => $this->id,
