@@ -17,7 +17,7 @@ Run tests
 
 Tests assume an empty database. If you're running a dirty dev instance, clear the database with
 
-    `vagrant ssh -c "cd /vagrant && ./vendor/bin/phinx migrate -e development -t 0"`
+    vagrant ssh -c "cd /vagrant && ./vendor/bin/phinx migrate -e development -t 0"
 Then, run
     `tools/vagrant_migrate.sh`
 And the tests should work.
