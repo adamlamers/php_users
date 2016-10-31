@@ -116,4 +116,18 @@ class UserController
             return json_encode($response);
         }
     }
+
+    public function getByEmail($email)
+    {
+        $user = User::findByEmail($email);
+
+        if($user != null) {
+            $response = [ "status" => "ok", "message" => "Retrieved user successfully.",
+                "user" => $user->asArray() ];
+            return json_encode($response);
+        }
+        $response = [ "status" => "fail",
+            "message" => "User does not exist." ];
+        return json_encode($response);
+    }
 }

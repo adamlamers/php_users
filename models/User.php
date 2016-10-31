@@ -127,6 +127,26 @@ class User
         }
     }
 
+    public static function findByEmail($email)
+    {
+        $mysqli = new \mysqli(Config::$db_host, Config::$db_user, Config::$db_pass, Config::$db_name);
+
+        $stmt = $mysqli->prepare("SELECT id, email, first_name, last_name, password FROM users WHERE email=?");
+        $stmt->bind_param("s", $email);
+        $stmt->bind_result($lId, $lEmail, $lFirstName, $lLastName, $lPassword);
+        $stmt->execute();
+
+        if ($stmt->fetch()) {
+            $user = new User($lEmail, $lFirstName, $lLastName, $lPassword);
+            $user->id = $lId;
+            $user->exists = true;
+            $user->loaded_password = $user->password;
+            return $user;
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Deletes this user from the database.
      */

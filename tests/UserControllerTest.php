@@ -69,6 +69,25 @@ class UserControllerTest extends TestCase
     }
 
     /**
+     * @depends testGetUserSucceeds
+     */
+    public function testGetUserByEmailSucceeds($created_user_id)
+    {
+        $controller = new UserController();
+
+        $return = json_decode($controller->getByEmail('unit_test_email'));
+        $this->assertEquals($return->status, 'ok');
+        $this->assertEquals($return->message, 'Retrieved user successfully.');
+
+        $this->assertEquals($return->user->email, 'unit_test_email');
+        $this->assertEquals($return->user->first_name, 'php');
+        $this->assertEquals($return->user->last_name, 'unit');
+        $this->assertEquals(true, password_verify('phpunit', $return->user->password));
+
+        return $created_user_id;
+    }
+
+    /**
      * Test that getting a user fails with an impossible ID.
      */
     public function testGetUserFail()
