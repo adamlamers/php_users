@@ -4,7 +4,7 @@ namespace PHPUsers;
 class Router
 {
     private $table = array();
-    private $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'];
+    private $allowedMethods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD'];
 
     /**
      * Adds a route to the Router.

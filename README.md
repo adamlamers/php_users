@@ -41,7 +41,7 @@ it. As an example, here are some CURL command examples to call the endpoints.
 
 #### Create a user
 
-    curl --data "email=test@test.test&first_name=test&last_name=test&password=test" http://testbox.dev/user/create
+    curl -X POST --data "email=test@test.test&first_name=test&last_name=test&password=test" http://testbox.dev/user
 
 #### Retrieve a user
 
@@ -52,7 +52,7 @@ it. As an example, here are some CURL command examples to call the endpoints.
 
 #### Modify a user
 
-    curl --data "email=test2" http://testbox.dev/user/3/update
+    curl -X POST --data "email=test2@test.test" http://testbox.dev/user/3
 
 #### Delete a user
 
