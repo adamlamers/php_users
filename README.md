@@ -8,6 +8,10 @@ Create vagrant box
 
     vagrant up
 
+Edit hosts
+
+    echo 192.168.59.76   testbox.dev www.testbox.dev | sudo tee -a /etc/hosts
+
 Install composer packages
 
     composer install
@@ -37,16 +41,19 @@ it. As an example, here are some CURL command examples to call the endpoints.
 
 #### Create a user
 
-    curl --data "email=test&first_name=test&last_name=test&password=test" http://testbox.dev/user/create
+    curl --data "email=test@test.test&first_name=test&last_name=test&password=test" http://testbox.dev/user/create
 
 #### Retrieve a user
 
-    curl http://testbox.dev/user/3/get
+    curl http://testbox.dev/user/3
+
+#### Retrieve a user by email
+    curl http://testbox.dev/user/test@test.test
 
 #### Modify a user
 
-    curl --data "email=test2" http://testbox.dev/user/3/update" http://testbox.dev/user/3/update
+    curl --data "email=test2" http://testbox.dev/user/3/update
 
 #### Delete a user
 
-    curl http://testbox.dev/user/3/delete
+    curl -X DELETE http://testbox.dev/user/3
