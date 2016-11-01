@@ -30,8 +30,11 @@ Tests assume an empty database. If you're running a dirty dev instance, clear th
 
     vagrant ssh -c "cd /vagrant && ./vendor/bin/phinx migrate -e development -t 0"
 Then, run
+
     tools/vagrant_migrate.sh
-And the tests should work.
+
+And the tests should work:
+
     tools/vagrant_test.sh
 
 ### Usage
@@ -57,3 +60,15 @@ it. As an example, here are some CURL command examples to call the endpoints.
 #### Delete a user
 
     curl -X DELETE http://testbox.dev/user/3
+
+### Configuration
+
+Config lives in the project root, in `config.php`
+
+### Explanation
+
+This project uses a custom routing system, to facilitate using RESTful style URIs.
+It provides a JSON-style API for creating, reading, updating and deleting User accounts in
+a MySQL database. I thought it would be fun to create my own routing system, and it works
+alright for the use case this project presented. It's a Regex based system so sometimes
+clever methods of matching the URI are needed.
